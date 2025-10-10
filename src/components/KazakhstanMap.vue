@@ -1,160 +1,183 @@
 <template>
-  <div class="w-full h-screen">
-    <l-map
-      ref="mapRef"
-      style="height: 100%; width: 100%"
-      :zoom="5"
-      :center="[48.0, 67.0]"
-      :zoomControl="true"
-      @ready="onMapReady"
-    >
-      <l-tile-layer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="© OpenStreetMap contributors"
-      />
-
-      <!-- Remove the l-geo-json component for now and add it manually -->
-    </l-map>
-  </div>
+  <div id="map"></div>
 </template>
 
 <script setup>
-import * as L from 'leaflet'
+import { regionsDatabase, getRegionData } from '@/data/regionsData.js'
+import { onMounted, onUnmounted } from 'vue'
+import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { LMap, LTileLayer } from '@vue-leaflet/vue-leaflet'
-import { ref } from 'vue'
-import geojsonRaw from '@/assets/kazakhstan.json'
+import { Chart, registerables } from 'chart.js'
 
-const emit = defineEmits(['region-selected'])
-const mapRef = ref(null)
+// Register all chart.js components
+Chart.register(...registerables)
 
-delete L.Icon.Default.prototype._getIconUrl
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-})
+const nameToKeyMap = {
+  Astana: 'astana',
+  'Almaty (city)': 'almaty',
+  'Shymkent (city)': 'shimkent',
+  Akmola: 'akmo',
+  'North Kazakhstan': 'sko',
+  'East Kazakhstan': 'vko',
+  'West Kazakhstan': 'zko',
+  Jambyl: 'yuko',
+  Turkestan: 'yuko',
+  Abai: 'vko', // example: Abai -> East Kazakhstan
+  Karaganda: 'akmo', // example, adjust as you wish
+  Jetisu: 'vko', // example, adjust as needed
+  Atyrau: 'zko', // example mapping
+  Aktobe: 'zko', // example mapping
+  Kostanay: 'sko', // example mapping
+  Kyzylorda: 'yuko', // example mapping
+  Mangystau: 'zko', // example mapping
+  Ulytau: 'akmo', // example mapping
+  Pavlodar: 'vko', // example mapping
+}
 
-const geojsonData = typeof geojsonRaw === 'string' ? JSON.parse(geojsonRaw) : geojsonRaw
+let map = null
+const chartInstances = new Map()
 
-console.log('✅ GeoJSON features count:', geojsonData.features?.length)
-console.log('🔍 First feature sample:', geojsonData.features?.[0])
-console.log('🔍 Feature properties sample:', geojsonData.features?.[0]?.properties)
+// Example temperature data per region
+const temperatureData = {
+  'Shymkent (city)': [3, 6, 12, 18, 24, 28, 30, 29, 25, 17, 9, 4],
+  Taraz: [2, 5, 10, 16, 23, 27, 29, 28, 23, 15, 8, 3],
+}
 
-// стиль по умолчанию
-const styleFeature = () => ({
-  color: '#444',
-  weight: 1,
-  fillColor: '#6baed6',
-  fillOpacity: 0.6,
-  interactive: true, // 👈 обязательно
-})
+// Load GeoJSON file
+async function loadGeoJSON() {
+  const response = await fetch('/src/assets/kazakhstan.json')
+  if (!response.ok) throw new Error('Failed to load Kazakhstan GeoJSON')
+  return await response.json()
+}
 
-// добавляем события
-const onEachFeature = (feature, layer) => {
-  console.log('🎯 Setting up feature:', feature.properties)
-  layer.options.interactive = true // 👈 обязательно
+function showPopup(feature, latlng) {
+  const regionName = feature.properties.name
+  const regionKey = nameToKeyMap[regionName]
+  const regionInfo = getRegionData(regionKey)
 
-  layer.on('click', (e) => {
-    console.log('🖱️ Клик произошел!')
-    console.log('📍 Feature:', feature)
-    console.log('📋 Properties:', feature.properties)
-    console.log('🏷️ Name from properties:', feature.properties?.name)
+  const canvasId = `chart-${regionKey ?? regionName.replace(/\s+/g, '-')}`
 
-    const name = feature.properties?.name || 'Неизвестный регион'
+  // Create popup container
+  const container = document.createElement('div')
+  container.style.width = '360px'
+  container.style.maxWidth = '100%'
+  container.style.padding = '8px'
+  container.style.overflow = 'hidden' // ✅ keeps content inside
+  container.style.boxSizing = 'border-box'
 
-    // Пытаемся найти соответствующий регион в базе данных
-    const regionId = getRegionIdFromName(name)
-    console.log('🔍 Region ID:', regionId)
+  // Build region info HTML
+  if (regionInfo) {
+    container.innerHTML = `
+      <div style="font-weight:bold;font-size:16px;margin-bottom:6px">${regionInfo.name}</div>
+      <div style="font-size:13px;margin-bottom:4px">
+        Тип: ${regionInfo.type}<br/>
+        Население: ${regionInfo.population.toLocaleString()} чел<br/>
+        Площадь: ${regionInfo.area.toLocaleString()} км²<br/>
+        Ср. температура: ${regionInfo.temp}°C<br/>
+        Влажность: ${regionInfo.humidity}%<br/>
+        Ветер: ${regionInfo.windSpeed} м/с
+      </div>
+    `
+  } else {
+    container.innerHTML = `<b>${regionName}</b><br/><i>Нет данных</i>`
+  }
 
-    if (regionId) {
-      // Эмитим событие для открытия модального окна
-      console.log('✅ Эмитим событие region-selected с:', regionId)
-      emit('region-selected', regionId)
-    } else {
-      // Показываем popup если регион не найден в базе данных
-      console.log('❌ Регион не найден в базе данных, показываем popup')
-      L.popup()
-        .setLatLng(e.latlng)
-        .setContent(`<b>${name}</b><br><small>Данные недоступны</small>`)
-        .openOn(e.target._map)
+  // Add a canvas for Chart.js
+  const canvas = document.createElement('canvas')
+  canvas.id = canvasId
+  canvas.style.display = 'block'
+  canvas.style.width = '100%'
+  canvas.style.height = '180px'
+  canvas.style.maxHeight = '180px'
+  canvas.style.objectFit = 'contain'
+
+  container.appendChild(canvas)
+
+  // Open popup
+  L.popup({ maxWidth: 420 }).setLatLng(latlng).setContent(container).openOn(map)
+
+  // Draw chart
+  if (regionInfo?.monthlyData) {
+    setTimeout(() => {
+      const ctx = document.getElementById(canvasId)
+      const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: regionInfo.monthlyData.map((m) => m.month),
+          datasets: [
+            {
+              label: 'Температура (°C)',
+              data: regionInfo.monthlyData.map((m) => m.temp),
+              backgroundColor: 'rgba(75, 192, 192, 0.5)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: `${regionInfo.name} — Средние температуры`,
+            },
+          },
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      })
+    }, 100)
+  }
+}
+
+onMounted(async () => {
+  map = L.map('map').setView([48.0196, 66.9237], 5)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+  }).addTo(map)
+
+  try {
+    const geojson = await loadGeoJSON()
+
+    L.geoJSON(geojson, {
+      style: {
+        color: '#0077ff',
+        weight: 1,
+        fillOpacity: 0.3,
+      },
+      onEachFeature: (feature, layer) => {
+        const name = feature.properties.name
+        layer.bindTooltip(name, { sticky: true })
+        layer.on('click', (e) => showPopup(feature, e.latlng))
+      },
+    }).addTo(map)
+  } catch (err) {
+    console.error(err)
+  }
+
+  // Clean up chart when popup closes
+  map.on('popupclose', (e) => {
+    const canvas = e.popup.getElement()?.querySelector('canvas')
+    if (canvas && chartInstances.has(canvas.id)) {
+      chartInstances.get(canvas.id).destroy()
+      chartInstances.delete(canvas.id)
     }
   })
+})
 
-  layer.on('mouseover', (e) => {
-    e.target.setStyle({ fillColor: '#2171b5', fillOpacity: 0.8 })
-  })
-
-  layer.on('mouseout', (e) => {
-    e.target.setStyle({ fillColor: '#6baed6', fillOpacity: 0.6 })
-  })
-}
-
-// Функция для сопоставления названий регионов с ключами в базе данных
-const getRegionIdFromName = (name) => {
-  const nameMapping = {
-    // Russian names
-    Астана: 'astana',
-    Алматы: 'almaty',
-    Шымкент: 'shimkent',
-    'Акмолинская область': 'akmo',
-    'Северо-Казахстанская область': 'sko',
-    'Восточно-Казахстанская область': 'vko',
-    'Западно-Казахстанская область': 'zko',
-    'Южно-Казахстанская область': 'yuko',
-
-    // English names from GeoJSON
-    'Nur-Sultan': 'astana',
-    Astana: 'astana',
-    Almaty: 'almaty',
-    Shymkent: 'shimkent',
-    Akmola: 'akmo',
-    'North Kazakhstan': 'sko',
-    'East Kazakhstan': 'vko',
-    'West Kazakhstan': 'zko',
-    'South Kazakhstan': 'yuko',
-    Karaganda: 'akmo', // Assuming Karaganda is in Akmola region
-    Aktobe: 'zko',
-    Atyrau: 'zko',
-    Kostanay: 'sko',
-    Pavlodar: 'vko',
-    Mangystau: 'zko',
-    Zhambyl: 'yuko',
-    Kyzylorda: 'yuko',
+onUnmounted(() => {
+  if (map) {
+    map.remove()
+    map = null
   }
-
-  // Прямое соответствие
-  if (nameMapping[name]) {
-    return nameMapping[name]
-  }
-
-  // Поиск по частичному совпадению
-  for (const [fullName, id] of Object.entries(nameMapping)) {
-    if (
-      name.toLowerCase().includes(fullName.toLowerCase()) ||
-      fullName.toLowerCase().includes(name.toLowerCase())
-    ) {
-      return id
-    }
-  }
-
-  return null
-}
-
-// Map ready handler - add GeoJSON manually to ensure click events work
-const onMapReady = () => {
-  console.log('📍 Map is ready, adding GeoJSON layer manually')
-  const map = mapRef.value.leafletObject
-
-  if (map && geojsonData) {
-    const geoJsonLayer = L.geoJSON(geojsonData, {
-      style: styleFeature,
-      onEachFeature: onEachFeature,
-      interactive: true,
-    })
-
-    geoJsonLayer.addTo(map)
-    console.log('✅ GeoJSON layer added to map successfully')
-  }
-}
+})
 </script>
+
+<style scoped>
+#map {
+  width: 100%;
+  height: 100%;
+}
+</style>

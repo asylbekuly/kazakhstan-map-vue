@@ -62843,13 +62843,13 @@
           ]
         ]
       }, 
-      "type": "Feature", 
-      "properties": {
-        "source": "https://simplemaps.com", 
-        "id": "KZ43", 
-        "name": "Kyzylorda"
-      }, 
-      "id": 10
+        "type": "Feature", 
+        "properties": {
+          "source": "https://simplemaps.com", 
+          "id": "KZ43", 
+          "name": "Kyzylorda"
+        }, 
+        "id": 10
     }, 
     {
       "geometry": {
