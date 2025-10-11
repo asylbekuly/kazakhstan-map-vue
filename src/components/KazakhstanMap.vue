@@ -51,8 +51,9 @@ function showPopup(feature, latlng) {
 
   const canvasId = `chart-${regionKey ?? regionName.replace(/\s+/g, '-')}`
 
+  // ✅ создаём контейнер
   const container = document.createElement('div')
-  container.style.width = '360px'
+  container.style.width = '320px'
   container.style.padding = '8px'
 
   if (regionInfo) {
@@ -71,16 +72,16 @@ function showPopup(feature, latlng) {
     container.innerHTML = `<b>${regionName}</b><br/><i>Нет данных</i>`
   }
 
+  // ✅ создаём холст один раз
   const canvas = document.createElement('canvas')
   canvas.id = canvasId
   canvas.style.display = 'block'
   canvas.style.width = '100%'
-  canvas.style.height = '150px'
-  canvas.style.maxHeight = '150px'
+  canvas.style.height = '120px'
   canvas.style.objectFit = 'contain'
-
   container.appendChild(canvas)
 
+  // ✅ создаём popup
   L.popup({
     maxWidth: 400,
     maxHeight: 250,
@@ -91,9 +92,12 @@ function showPopup(feature, latlng) {
     .setContent(container)
     .openOn(map)
 
+  // ✅ создаём график, если есть данные
   if (regionInfo?.monthlyData) {
     setTimeout(() => {
       const ctx = document.getElementById(canvasId)
+      if (!ctx) return
+
       const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -102,33 +106,40 @@ function showPopup(feature, latlng) {
             {
               label: 'Температура (°C)',
               data: regionInfo.monthlyData.map((m) => m.temp),
-              backgroundColor: 'rgba(75, 192, 192, 0.5)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1,
+              borderColor: '#ff5733',
+              backgroundColor: 'rgba(255, 87, 51, 0.2)',
+              borderWidth: 2,
+              tension: 0.4,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              fill: true,
             },
           ],
         },
         options: {
           responsive: true,
-          maintainAspectRatio: false, // you already have this
-          aspectRatio: 2, // ✅ force width/height ratio
+          maintainAspectRatio: true,
+          aspectRatio: 2.2,
           plugins: {
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: { font: { size: 9 } },
+            },
             title: {
               display: true,
               text: `${regionInfo.name} — Средние температуры`,
-              font: { size: 14 },
-            },
-            legend: {
-              labels: { font: { size: 10 } },
+              font: { size: 13 },
             },
           },
           scales: {
             y: {
-              beginAtZero: true,
-              ticks: { font: { size: 10 } },
+              ticks: { font: { size: 9 } },
+              grid: { color: 'rgba(0,0,0,0.1)' },
             },
             x: {
-              ticks: { font: { size: 10 } },
+              ticks: { font: { size: 9 } },
+              grid: { color: 'rgba(0,0,0,0.05)' },
             },
           },
         },
