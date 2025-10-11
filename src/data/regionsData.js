@@ -1,5 +1,5 @@
-
 export const regionsDatabase = {
+  // === ГОРОДА ===
   astana: {
     name: 'Астана',
     type: 'Город',
@@ -10,142 +10,367 @@ export const regionsDatabase = {
     humidity: 65,
     windSpeed: 8.5,
     monthlyData: [
-      { месяц: 'Янв', month: 'Янв', temp: -8, осадки: 15 },
-      { месяц: 'Фев', month: 'Фев', temp: -6, осадки: 12 },
-      { месяц: 'Мар', month: 'Мар', temp: 2, осадки: 18 },
-      { месяц: 'Апр', month: 'Апр', temp: 10, осадки: 25 },
-      { месяц: 'Май', month: 'Май', temp: 18, осадки: 20 },
-      { месяц: 'Июн', month: 'Июн', temp: 24, осадки: 28 }
+      { month: 'Янв', temp: -8 },
+      { month: 'Фев', temp: -6 },
+      { month: 'Мар', temp: 2 },
+      { month: 'Апр', temp: 10 },
+      { month: 'Май', temp: 18 },
+      { month: 'Июн', temp: 24 }
     ]
   },
   almaty: {
-    name: 'Алматы',
+    name: 'Алматы (город)',
     type: 'Город',
-    population: 1406362,
+    population: 2000000,
     area: 682,
     temp: 8.1,
     precipitation: 18,
     humidity: 58,
     windSpeed: 6.2,
     monthlyData: [
-      { месяц: 'Янв', month: 'Янв', temp: -2, осадки: 22 },
-      { месяц: 'Фев', month: 'Фев', temp: 0, осадки: 20 },
-      { месяц: 'Мар', month: 'Мар', temp: 5, осадки: 25 },
-      { месяц: 'Апр', month: 'Апр', temp: 14, осадки: 32 },
-      { месяц: 'Май', month: 'Май', temp: 22, осадки: 28 },
-      { месяц: 'Июн', month: 'Июн', temp: 28, осадки: 35 }
+      { month: 'Янв', temp: -2 },
+      { month: 'Фев', temp: 0 },
+      { month: 'Мар', temp: 5 },
+      { month: 'Апр', temp: 14 },
+      { month: 'Май', temp: 22 },
+      { month: 'Июн', temp: 28 }
     ]
   },
   shimkent: {
-    name: 'Шымкент',
+    name: 'Шымкент (город)',
     type: 'Город',
-    population: 1405362,
-    area: 1160,
+    population: 1200000,
+    area: 1170,
     temp: 15.3,
     precipitation: 22,
     humidity: 52,
     windSpeed: 7.1,
     monthlyData: [
-      { месяц: 'Янв', month: 'Янв', temp: 3, осадки: 18 },
-      { месяц: 'Фев', month: 'Фев', temp: 5, осадки: 16 },
-      { месяц: 'Мар', month: 'Мар', temp: 12, осадки: 22 },
-      { месяц: 'Апр', month: 'Апр', temp: 21, осадки: 28 },
-      { месяц: 'Май', month: 'Май', temp: 30, осадки: 25 },
-      { месяц: 'Июн', month: 'Июн', temp: 36, осадки: 30 }
+      { month: 'Янв', temp: 3 },
+      { month: 'Фев', temp: 5 },
+      { month: 'Мар', temp: 12 },
+      { month: 'Апр', temp: 21 },
+      { month: 'Май', temp: 30 },
+      { month: 'Июн', temp: 36 }
     ]
   },
-  akmo: {
+
+  // === СЕВЕР И ЦЕНТР ===
+  akmola: {
     name: 'Акмолинская область',
     type: 'Область',
-    population: 1405362,
+    population: 740000,
     area: 146200,
     temp: 4.3,
     precipitation: 13,
     humidity: 64,
     windSpeed: 9.1,
     monthlyData: [
-      { месяц: 'Янв', month: 'Янв', temp: -10, осадки: 13 },
-      { месяц: 'Фев', month: 'Фев', temp: -8, осадки: 11 },
-      { месяц: 'Мар', month: 'Мар', temp: 0, осадки: 16 },
-      { месяц: 'Апр', month: 'Апр', temp: 9, осадки: 22 },
-      { месяц: 'Май', month: 'Май', temp: 17, осадки: 19 },
-      { месяц: 'Июн', month: 'Июн', temp: 23, осадки: 25 }
+      { month: 'Янв', temp: -11 },
+      { month: 'Фев', temp: -9 },
+      { month: 'Мар', temp: 0 },
+      { month: 'Апр', temp: 9 },
+      { month: 'Май', temp: 17 },
+      { month: 'Июн', temp: 23 }
     ]
   },
   sko: {
     name: 'Северо-Казахстанская область',
     type: 'Область',
-    population: 612100,
+    population: 560000,
     area: 98100,
     temp: 2.1,
     precipitation: 11,
     humidity: 68,
     windSpeed: 10.2,
     monthlyData: [
-      { месяц: 'Янв', month: 'Янв', temp: -14, осадки: 10 },
-      { месяц: 'Фев', month: 'Фев', temp: -12, осадки: 9 },
-      { месяц: 'Мар', month: 'Мар', temp: -4, осадки: 13 },
-      { месяц: 'Апр', month: 'Апр', temp: 6, осадки: 18 },
-      { месяц: 'Май', month: 'Май', temp: 14, осадки: 16 },
-      { месяц: 'Июн', month: 'Июн', temp: 20, осадки: 22 }
+      { month: 'Янв', temp: -14 },
+      { month: 'Фев', temp: -12 },
+      { month: 'Мар', temp: -4 },
+      { month: 'Апр', temp: 6 },
+      { month: 'Май', temp: 14 },
+      { month: 'Июн', temp: 20 }
     ]
   },
-  vko: {
-    name: 'Восточно-Казахстанская область',
+  karaganda: {
+    name: 'Карагандинская область',
     type: 'Область',
-    population: 1405362,
-    area: 283200,
+    population: 1350000,
+    area: 428000,
+    temp: 4.2,
+    precipitation: 15,
+    humidity: 63,
+    windSpeed: 8.5,
+    monthlyData: [
+      { month: 'Янв', temp: -10 },
+      { month: 'Фев', temp: -8 },
+      { month: 'Мар', temp: -1 },
+      { month: 'Апр', temp: 9 },
+      { month: 'Май', temp: 17 },
+      { month: 'Июн', temp: 23 }
+    ]
+  },
+  ulytau: {
+    name: 'Улытауская область',
+    type: 'Область',
+    population: 220000,
+    area: 188000,
+    temp: 5.0,
+    precipitation: 12,
+    humidity: 60,
+    windSpeed: 9.2,
+    monthlyData: [
+      { month: 'Янв', temp: -11 },
+      { month: 'Фев', temp: -9 },
+      { month: 'Мар', temp: -1 },
+      { month: 'Апр', temp: 10 },
+      { month: 'Май', temp: 18 },
+      { month: 'Июн', temp: 25 }
+    ]
+  },
+  kostanay: {
+    name: 'Костанайская область',
+    type: 'Область',
+    population: 870000,
+    area: 196000,
     temp: 3.8,
     precipitation: 14,
-    humidity: 62,
-    windSpeed: 9.3,
+    humidity: 67,
+    windSpeed: 8.9,
     monthlyData: [
-      { месяц: 'Янв', month: 'Янв', temp: -12, осадки: 12 },
-      { месяц: 'Фев', month: 'Фев', temp: -10, осадки: 10 },
-      { месяц: 'Мар', month: 'Мар', temp: -2, осадки: 15 },
-      { месяц: 'Апр', month: 'Апр', temp: 8, осадки: 20 },
-      { месяц: 'Май', month: 'Май', temp: 16, осадки: 18 },
-      { месяц: 'Июн', month: 'Июн', temp: 22, осадки: 24 }
+      { month: 'Янв', temp: -13 },
+      { month: 'Фев', temp: -11 },
+      { month: 'Мар', temp: -3 },
+      { month: 'Апр', temp: 7 },
+      { month: 'Май', temp: 15 },
+      { month: 'Июн', temp: 21 }
     ]
   },
+  pavlodar: {
+    name: 'Павлодарская область',
+    type: 'Область',
+    population: 750000,
+    area: 124800,
+    temp: 3.9,
+    precipitation: 14,
+    humidity: 62,
+    windSpeed: 8.7,
+    monthlyData: [
+      { month: 'Янв', temp: -13 },
+      { month: 'Фев', temp: -10 },
+      { month: 'Мар', temp: -1 },
+      { month: 'Апр', temp: 8 },
+      { month: 'Май', temp: 17 },
+      { month: 'Июн', temp: 23 }
+    ]
+  },
+
+  // === ЗАПАД ===
   zko: {
     name: 'Западно-Казахстанская область',
     type: 'Область',
-    population: 1405362,
+    population: 700000,
     area: 151200,
     temp: 9.5,
     precipitation: 16,
     humidity: 60,
     windSpeed: 8.8,
     monthlyData: [
-      { месяц: 'Янв', month: 'Янв', temp: -4, осадки: 14 },
-      { месяц: 'Фев', month: 'Фев', temp: -2, осадки: 12 },
-      { месяц: 'Мар', month: 'Мар', temp: 6, осадки: 18 },
-      { месяц: 'Апр', month: 'Апр', temp: 15, осадки: 24 },
-      { месяц: 'Май', month: 'Май', temp: 24, осадки: 22 },
-      { месяц: 'Июн', month: 'Июн', temp: 30, осадки: 28 }
+      { month: 'Янв', temp: -4 },
+      { month: 'Фев', temp: -2 },
+      { month: 'Мар', temp: 6 },
+      { month: 'Апр', temp: 15 },
+      { month: 'Май', temp: 24 },
+      { month: 'Июн', temp: 30 }
     ]
   },
-  yuko: {
-    name: 'Южно-Казахстанская область',
+  atyrau: {
+    name: 'Атырауская область',
     type: 'Область',
-    population: 1405362,
-    area: 116200,
-    temp: 12.7,
+    population: 650000,
+    area: 118600,
+    temp: 10.2,
+    precipitation: 10,
+    humidity: 53,
+    windSpeed: 8.0,
+    monthlyData: [
+      { month: 'Янв', temp: -3 },
+      { month: 'Фев', temp: -1 },
+      { month: 'Мар', temp: 8 },
+      { month: 'Апр', temp: 16 },
+      { month: 'Май', temp: 25 },
+      { month: 'Июн', temp: 33 }
+    ]
+  },
+  aktobe: {
+    name: 'Актюбинская область',
+    type: 'Область',
+    population: 870000,
+    area: 300600,
+    temp: 8.2,
+    precipitation: 13,
+    humidity: 56,
+    windSpeed: 7.8,
+    monthlyData: [
+      { month: 'Янв', temp: -7 },
+      { month: 'Фев', temp: -5 },
+      { month: 'Мар', temp: 3 },
+      { month: 'Апр', temp: 13 },
+      { month: 'Май', temp: 22 },
+      { month: 'Июн', temp: 29 }
+    ]
+  },
+  mangystau: {
+    name: 'Мангистауская область',
+    type: 'Область',
+    population: 720000,
+    area: 165600,
+    temp: 11.8,
+    precipitation: 8,
+    humidity: 50,
+    windSpeed: 9.1,
+    monthlyData: [
+      { month: 'Янв', temp: -1 },
+      { month: 'Фев', temp: 2 },
+      { month: 'Мар', temp: 10 },
+      { month: 'Апр', temp: 18 },
+      { month: 'Май', temp: 26 },
+      { month: 'Июн', temp: 33 }
+    ]
+  },
+
+  // === ВОСТОК ===
+  vko: {
+    name: 'Восточно-Казахстанская область',
+    type: 'Область',
+    population: 1380000,
+    area: 283200,
+    temp: 3.8,
+    precipitation: 14,
+    humidity: 62,
+    windSpeed: 9.3,
+    monthlyData: [
+      { month: 'Янв', temp: -12 },
+      { month: 'Фев', temp: -10 },
+      { month: 'Мар', temp: -2 },
+      { month: 'Апр', temp: 8 },
+      { month: 'Май', temp: 16 },
+      { month: 'Июн', temp: 22 }
+    ]
+  },
+  abai: {
+    name: 'Абайская область',
+    type: 'Область',
+    population: 640000,
+    area: 185000,
+    temp: 4.1,
+    precipitation: 13,
+    humidity: 61,
+    windSpeed: 8.7,
+    monthlyData: [
+      { month: 'Янв', temp: -11 },
+      { month: 'Фев', temp: -9 },
+      { month: 'Мар', temp: -1 },
+      { month: 'Апр', temp: 9 },
+      { month: 'Май', temp: 17 },
+      { month: 'Июн', temp: 23 }
+    ]
+  },
+  jetisu: {
+    name: 'Жетысуская область',
+    type: 'Область',
+    population: 650000,
+    area: 118600,
+    temp: 6.7,
+    precipitation: 18,
+    humidity: 59,
+    windSpeed: 6.9,
+    monthlyData: [
+      { month: 'Янв', temp: -5 },
+      { month: 'Фев', temp: -3 },
+      { month: 'Мар', temp: 5 },
+      { month: 'Апр', temp: 14 },
+      { month: 'Май', temp: 22 },
+      { month: 'Июн', temp: 28 }
+    ]
+  },
+  almaty_obl: {
+    name: 'Алматинская область',
+    type: 'Область',
+    population: 1200000,
+    area: 223900,
+    temp: 7.5,
+    precipitation: 19,
+    humidity: 58,
+    windSpeed: 6.5,
+    monthlyData: [
+      { month: 'Янв', temp: -3 },
+      { month: 'Фев', temp: -1 },
+      { month: 'Мар', temp: 6 },
+      { month: 'Апр', temp: 15 },
+      { month: 'Май', temp: 24 },
+      { month: 'Июн', temp: 30 }
+    ]
+  },
+
+  // === ЮГ ===
+  jambyl: {
+    name: 'Жамбылская область',
+    type: 'Область',
+    population: 1200000,
+    area: 144200,
+    temp: 11.3,
     precipitation: 20,
+    humidity: 56,
+    windSpeed: 7.3,
+    monthlyData: [
+      { month: 'Янв', temp: 1 },
+      { month: 'Фев', temp: 3 },
+      { month: 'Мар', temp: 11 },
+      { month: 'Апр', temp: 19 },
+      { month: 'Май', temp: 27 },
+      { month: 'Июн', temp: 33 }
+    ]
+  },
+  turkestan: {
+    name: 'Туркестанская область',
+    type: 'Область',
+    population: 2000000,
+    area: 117300,
+    temp: 13.0,
+    precipitation: 22,
     humidity: 55,
     windSpeed: 7.5,
     monthlyData: [
-      { месяц: 'Янв', month: 'Янв', temp: 1, осадки: 20 },
-      { месяц: 'Фев', month: 'Фев', temp: 3, осадки: 18 },
-      { месяц: 'Мар', month: 'Мар', temp: 10, осадки: 24 },
-      { месяц: 'Апр', month: 'Апр', temp: 19, осадки: 30 },
-      { месяц: 'Май', month: 'Май', temp: 28, осадки: 26 },
-      { месяц: 'Июн', month: 'Июн', temp: 34, осадки: 32 }
+      { month: 'Янв', temp: 2 },
+      { month: 'Фев', temp: 4 },
+      { month: 'Мар', temp: 12 },
+      { month: 'Апр', temp: 21 },
+      { month: 'Май', temp: 29 },
+      { month: 'Июн', temp: 35 }
+    ]
+  },
+  kyzylorda: {
+    name: 'Кызылординская область',
+    type: 'Область',
+    population: 820000,
+    area: 226000,
+    temp: 11.0,
+    precipitation: 15,
+    humidity: 52,
+    windSpeed: 8.4,
+    monthlyData: [
+      { month: 'Янв', temp: -1 },
+      { month: 'Фев', temp: 2 },
+      { month: 'Мар', temp: 10 },
+      { month: 'Апр', temp: 18 },
+      { month: 'Май', temp: 27 },
+      { month: 'Июн', temp: 33 }
     ]
   }
 }
 
+// --- Функция для получения региона ---
 export const getRegionData = (regionId) => {
   return regionsDatabase[regionId] || null
 }

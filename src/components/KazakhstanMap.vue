@@ -13,26 +13,28 @@ import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
 
 const nameToKeyMap = {
-  Astana: 'astana',
-  'Almaty (city)': 'almaty',
-  'Shymkent (city)': 'shimkent',
-  Akmola: 'akmo',
-  'North Kazakhstan': 'sko',
-  'East Kazakhstan': 'vko',
-  'West Kazakhstan': 'zko',
-  Jambyl: 'yuko',
-  Turkestan: 'yuko',
-  Abai: 'vko', // example: Abai -> East Kazakhstan
-  Karaganda: 'akmo', // example, adjust as you wish
-  Jetisu: 'vko', // example, adjust as needed
-  Atyrau: 'zko', // example mapping
-  Aktobe: 'zko', // example mapping
-  Kostanay: 'sko', // example mapping
-  Kyzylorda: 'yuko', // example mapping
-  Mangystau: 'zko', // example mapping
-  Ulytau: 'akmo', // example mapping
-  Pavlodar: 'vko', // example mapping
+  "Astana": "astana",
+  "Almaty (city)": "almaty",
+  "Shymkent (city)": "shimkent",
+  "Akmola": "akmola",
+  "North Kazakhstan": "sko",
+  "Karaganda": "karaganda",
+  "Ulytau": "ulytau",
+  "Kostanay": "kostanay",
+  "Pavlodar": "pavlodar",
+  "East Kazakhstan": "vko",
+  "Abai": "abai",
+  "Jetisu": "jetisu",
+  "Almaty": "almaty_obl",
+  "Atyrau": "atyrau",
+  "Aktobe": "aktobe",
+  "Mangystau": "mangystau",
+  "West Kazakhstan": "zko",
+  "Jambyl": "jambyl",
+  "Turkestan": "turkestan",
+  "Kyzylorda": "kyzylorda"
 }
+
 
 let map = null
 const chartInstances = new Map()
