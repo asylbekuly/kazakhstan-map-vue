@@ -1,0 +1,363 @@
+{
+  "astana": {
+    "name": "Астана",
+    "type": "Город",
+    "population": 1405362,
+    "area": 1160,
+    "temp": 5.2,
+    "precipitation": 12,
+    "humidity": 65,
+    "windSpeed": 8.5,
+    "monthlyData": [
+      { "month": "Янв", "temp": -8 },
+      { "month": "Фев", "temp": -6 },
+      { "month": "Мар", "temp": 2 },
+      { "month": "Апр", "temp": 10 },
+      { "month": "Май", "temp": 18 },
+      { "month": "Июн", "temp": 24 }
+    ]
+  },
+  "almaty": {
+    "name": "Алматы (город)",
+    "type": "Город",
+    "population": 2000000,
+    "area": 682,
+    "temp": 8.1,
+    "precipitation": 18,
+    "humidity": 58,
+    "windSpeed": 6.2,
+    "monthlyData": [
+      { "month": "Янв", "temp": -2 },
+      { "month": "Фев", "temp": 0 },
+      { "month": "Мар", "temp": 5 },
+      { "month": "Апр", "temp": 14 },
+      { "month": "Май", "temp": 22 },
+      { "month": "Июн", "temp": 28 }
+    ]
+  },
+  "shimkent": {
+    "name": "Шымкент (город)",
+    "type": "Город",
+    "population": 1200000,
+    "area": 1170,
+    "temp": 15.3,
+    "precipitation": 22,
+    "humidity": 52,
+    "windSpeed": 7.1,
+    "monthlyData": [
+      { "month": "Янв", "temp": 3 },
+      { "month": "Фев", "temp": 5 },
+      { "month": "Мар", "temp": 12 },
+      { "month": "Апр", "temp": 21 },
+      { "month": "Май", "temp": 30 },
+      { "month": "Июн", "temp": 36 }
+    ]
+  },
+  "akmola": {
+    "name": "Акмолинская область",
+    "type": "Область",
+    "population": 740000,
+    "area": 146200,
+    "temp": 4.3,
+    "precipitation": 13,
+    "humidity": 64,
+    "windSpeed": 9.1,
+    "monthlyData": [
+      { "month": "Янв", "temp": -11 },
+      { "month": "Фев", "temp": -9 },
+      { "month": "Мар", "temp": 0 },
+      { "month": "Апр", "temp": 9 },
+      { "month": "Май", "temp": 17 },
+      { "month": "Июн", "temp": 23 }
+    ]
+  },
+  "sko": {
+    "name": "Северо-Казахстанская область",
+    "type": "Область",
+    "population": 560000,
+    "area": 98100,
+    "temp": 2.1,
+    "precipitation": 11,
+    "humidity": 68,
+    "windSpeed": 10.2,
+    "monthlyData": [
+      { "month": "Янв", "temp": -14 },
+      { "month": "Фев", "temp": -12 },
+      { "month": "Мар", "temp": -4 },
+      { "month": "Апр", "temp": 6 },
+      { "month": "Май", "temp": 14 },
+      { "month": "Июн", "temp": 20 }
+    ]
+  },
+  "karaganda": {
+    "name": "Карагандинская область",
+    "type": "Область",
+    "population": 1350000,
+    "area": 428000,
+    "temp": 4.2,
+    "precipitation": 15,
+    "humidity": 63,
+    "windSpeed": 8.5,
+    "monthlyData": [
+      { "month": "Янв", "temp": -10 },
+      { "month": "Фев", "temp": -8 },
+      { "month": "Мар", "temp": -1 },
+      { "month": "Апр", "temp": 9 },
+      { "month": "Май", "temp": 17 },
+      { "month": "Июн", "temp": 23 }
+    ]
+  },
+  "ulytau": {
+    "name": "Улытауская область",
+    "type": "Область",
+    "population": 220000,
+    "area": 188000,
+    "temp": 5.0,
+    "precipitation": 12,
+    "humidity": 60,
+    "windSpeed": 9.2,
+    "monthlyData": [
+      { "month": "Янв", "temp": -11 },
+      { "month": "Фев", "temp": -9 },
+      { "month": "Мар", "temp": -1 },
+      { "month": "Апр", "temp": 10 },
+      { "month": "Май", "temp": 18 },
+      { "month": "Июн", "temp": 25 }
+    ]
+  },
+  "kostanay": {
+    "name": "Костанайская область",
+    "type": "Область",
+    "population": 870000,
+    "area": 196000,
+    "temp": 3.8,
+    "precipitation": 14,
+    "humidity": 67,
+    "windSpeed": 8.9,
+    "monthlyData": [
+      { "month": "Янв", "temp": -13 },
+      { "month": "Фев", "temp": -11 },
+      { "month": "Мар", "temp": -3 },
+      { "month": "Апр", "temp": 7 },
+      { "month": "Май", "temp": 15 },
+      { "month": "Июн", "temp": 21 }
+    ]
+  },
+  "pavlodar": {
+    "name": "Павлодарская область",
+    "type": "Область",
+    "population": 750000,
+    "area": 124800,
+    "temp": 3.9,
+    "precipitation": 14,
+    "humidity": 62,
+    "windSpeed": 8.7,
+    "monthlyData": [
+      { "month": "Янв", "temp": -13 },
+      { "month": "Фев", "temp": -10 },
+      { "month": "Мар", "temp": -1 },
+      { "month": "Апр", "temp": 8 },
+      { "month": "Май", "temp": 17 },
+      { "month": "Июн", "temp": 23 }
+    ]
+  },
+  "zko": {
+    "name": "Западно-Казахстанская область",
+    "type": "Область",
+    "population": 700000,
+    "area": 151200,
+    "temp": 9.5,
+    "precipitation": 16,
+    "humidity": 60,
+    "windSpeed": 8.8,
+    "monthlyData": [
+      { "month": "Янв", "temp": -4 },
+      { "month": "Фев", "temp": -2 },
+      { "month": "Мар", "temp": 6 },
+      { "month": "Апр", "temp": 15 },
+      { "month": "Май", "temp": 24 },
+      { "month": "Июн", "temp": 30 }
+    ]
+  },
+  "atyrau": {
+    "name": "Атырауская область",
+    "type": "Область",
+    "population": 650000,
+    "area": 118600,
+    "temp": 10.2,
+    "precipitation": 10,
+    "humidity": 53,
+    "windSpeed": 8.0,
+    "monthlyData": [
+      { "month": "Янв", "temp": -3 },
+      { "month": "Фев", "temp": -1 },
+      { "month": "Мар", "temp": 8 },
+      { "month": "Апр", "temp": 16 },
+      { "month": "Май", "temp": 25 },
+      { "month": "Июн", "temp": 33 }
+    ]
+  },
+  "aktobe": {
+    "name": "Актюбинская область",
+    "type": "Область",
+    "population": 870000,
+    "area": 300600,
+    "temp": 8.2,
+    "precipitation": 13,
+    "humidity": 56,
+    "windSpeed": 7.8,
+    "monthlyData": [
+      { "month": "Янв", "temp": -7 },
+      { "month": "Фев", "temp": -5 },
+      { "month": "Мар", "temp": 3 },
+      { "month": "Апр", "temp": 13 },
+      { "month": "Май", "temp": 22 },
+      { "month": "Июн", "temp": 29 }
+    ]
+  },
+  "mangystau": {
+    "name": "Мангистауская область",
+    "type": "Область",
+    "population": 720000,
+    "area": 165600,
+    "temp": 11.8,
+    "precipitation": 8,
+    "humidity": 50,
+    "windSpeed": 9.1,
+    "monthlyData": [
+      { "month": "Янв", "temp": -1 },
+      { "month": "Фев", "temp": 2 },
+      { "month": "Мар", "temp": 10 },
+      { "month": "Апр", "temp": 18 },
+      { "month": "Май", "temp": 26 },
+      { "month": "Июн", "temp": 33 }
+    ]
+  },
+  "vko": {
+    "name": "Восточно-Казахстанская область",
+    "type": "Область",
+    "population": 1380000,
+    "area": 283200,
+    "temp": 3.8,
+    "precipitation": 14,
+    "humidity": 62,
+    "windSpeed": 9.3,
+    "monthlyData": [
+      { "month": "Янв", "temp": -12 },
+      { "month": "Фев", "temp": -10 },
+      { "month": "Мар", "temp": -2 },
+      { "month": "Апр", "temp": 8 },
+      { "month": "Май", "temp": 16 },
+      { "month": "Июн", "temp": 22 }
+    ]
+  },
+  "abai": {
+    "name": "Абайская область",
+    "type": "Область",
+    "population": 640000,
+    "area": 185000,
+    "temp": 4.1,
+    "precipitation": 13,
+    "humidity": 61,
+    "windSpeed": 8.7,
+    "monthlyData": [
+      { "month": "Янв", "temp": -11 },
+      { "month": "Фев", "temp": -9 },
+      { "month": "Мар", "temp": -1 },
+      { "month": "Апр", "temp": 9 },
+      { "month": "Май", "temp": 17 },
+      { "month": "Июн", "temp": 23 }
+    ]
+  },
+  "jetisu": {
+    "name": "Жетысуская область",
+    "type": "Область",
+    "population": 650000,
+    "area": 118600,
+    "temp": 6.7,
+    "precipitation": 18,
+    "humidity": 59,
+    "windSpeed": 6.9,
+    "monthlyData": [
+      { "month": "Янв", "temp": -5 },
+      { "month": "Фев", "temp": -3 },
+      { "month": "Мар", "temp": 5 },
+      { "month": "Апр", "temp": 14 },
+      { "month": "Май", "temp": 22 },
+      { "month": "Июн", "temp": 28 }
+    ]
+  },
+  "almaty_obl": {
+    "name": "Алматинская область",
+    "type": "Область",
+    "population": 1200000,
+    "area": 223900,
+    "temp": 7.5,
+    "precipitation": 19,
+    "humidity": 58,
+    "windSpeed": 6.5,
+    "monthlyData": [
+      { "month": "Янв", "temp": -3 },
+      { "month": "Фев", "temp": -1 },
+      { "month": "Мар", "temp": 6 },
+      { "month": "Апр", "temp": 15 },
+      { "month": "Май", "temp": 24 },
+      { "month": "Июн", "temp": 30 }
+    ]
+  },
+  "jambyl": {
+    "name": "Жамбылская область",
+    "type": "Область",
+    "population": 1200000,
+    "area": 144200,
+    "temp": 11.3,
+    "precipitation": 20,
+    "humidity": 56,
+    "windSpeed": 7.3,
+    "monthlyData": [
+      { "month": "Янв", "temp": 1 },
+      { "month": "Фев", "temp": 3 },
+      { "month": "Мар", "temp": 11 },
+      { "month": "Апр", "temp": 19 },
+      { "month": "Май", "temp": 27 },
+      { "month": "Июн", "temp": 33 }
+    ]
+  },
+  "turkestan": {
+    "name": "Туркестанская область",
+    "type": "Область",
+    "population": 2000000,
+    "area": 117300,
+    "temp": 13.0,
+    "precipitation": 22,
+    "humidity": 55,
+    "windSpeed": 7.5,
+    "monthlyData": [
+      { "month": "Янв", "temp": 2 },
+      { "month": "Фев", "temp": 4 },
+      { "month": "Мар", "temp": 12 },
+      { "month": "Апр", "temp": 21 },
+      { "month": "Май", "temp": 29 },
+      { "month": "Июн", "temp": 35 }
+    ]
+  },
+  "kyzylorda": {
+    "name": "Кызылординская область",
+    "type": "Область",
+    "population": 820000,
+    "area": 226000,
+    "temp": 11.0,
+    "precipitation": 15,
+    "humidity": 52,
+    "windSpeed": 8.4,
+    "monthlyData": [
+      { "month": "Янв", "temp": -1 },
+      { "month": "Фев", "temp": 2 },
+      { "month": "Мар", "temp": 10 },
+      { "month": "Апр", "temp": 18 },
+      { "month": "Май", "temp": 27 },
+      { "month": "Июн", "temp": 33 }
+    ]
+  }
+}
+

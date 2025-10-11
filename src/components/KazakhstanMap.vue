@@ -3,49 +3,41 @@
 </template>
 
 <script setup>
-import { regionsDatabase, getRegionData } from '@/data/regionsData.js'
+import regionsDatabase from '@/data/regionsData.json'
+import { getRegionData } from '@/data/useRegionData.js'
 import { onMounted, onUnmounted } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { Chart, registerables } from 'chart.js'
 
-// Register all chart.js components
 Chart.register(...registerables)
 
 const nameToKeyMap = {
-  "Astana": "astana",
-  "Almaty (city)": "almaty",
-  "Shymkent (city)": "shimkent",
-  "Akmola": "akmola",
-  "North Kazakhstan": "sko",
-  "Karaganda": "karaganda",
-  "Ulytau": "ulytau",
-  "Kostanay": "kostanay",
-  "Pavlodar": "pavlodar",
-  "East Kazakhstan": "vko",
-  "Abai": "abai",
-  "Jetisu": "jetisu",
-  "Almaty": "almaty_obl",
-  "Atyrau": "atyrau",
-  "Aktobe": "aktobe",
-  "Mangystau": "mangystau",
-  "West Kazakhstan": "zko",
-  "Jambyl": "jambyl",
-  "Turkestan": "turkestan",
-  "Kyzylorda": "kyzylorda"
+  Astana: 'astana',
+  'Almaty (city)': 'almaty',
+  'Shymkent (city)': 'shimkent',
+  Akmola: 'akmola',
+  'North Kazakhstan': 'sko',
+  Karaganda: 'karaganda',
+  Ulytau: 'ulytau',
+  Kostanay: 'kostanay',
+  Pavlodar: 'pavlodar',
+  'East Kazakhstan': 'vko',
+  Abai: 'abai',
+  Jetisu: 'jetisu',
+  Almaty: 'almaty_obl',
+  Atyrau: 'atyrau',
+  Aktobe: 'aktobe',
+  Mangystau: 'mangystau',
+  'West Kazakhstan': 'zko',
+  Jambyl: 'jambyl',
+  Turkestan: 'turkestan',
+  Kyzylorda: 'kyzylorda',
 }
-
 
 let map = null
 const chartInstances = new Map()
 
-// Example temperature data per region
-const temperatureData = {
-  'Shymkent (city)': [3, 6, 12, 18, 24, 28, 30, 29, 25, 17, 9, 4],
-  Taraz: [2, 5, 10, 16, 23, 27, 29, 28, 23, 15, 8, 3],
-}
-
-// Load GeoJSON file
 async function loadGeoJSON() {
   const response = await fetch('/src/assets/kazakhstan.json')
   if (!response.ok) throw new Error('Failed to load Kazakhstan GeoJSON')
@@ -54,20 +46,15 @@ async function loadGeoJSON() {
 
 function showPopup(feature, latlng) {
   const regionName = feature.properties.name
-  const regionKey = nameToKeyMap[regionName]
+  const regionKey = nameToKeyMap[regionName] || regionName.toLowerCase().replace(/\s+/g, '_')
   const regionInfo = getRegionData(regionKey)
 
   const canvasId = `chart-${regionKey ?? regionName.replace(/\s+/g, '-')}`
 
-  // Create popup container
   const container = document.createElement('div')
   container.style.width = '360px'
-  container.style.maxWidth = '100%'
   container.style.padding = '8px'
-  container.style.overflow = 'hidden' // ✅ keeps content inside
-  container.style.boxSizing = 'border-box'
 
-  // Build region info HTML
   if (regionInfo) {
     container.innerHTML = `
       <div style="font-weight:bold;font-size:16px;margin-bottom:6px">${regionInfo.name}</div>
@@ -84,26 +71,31 @@ function showPopup(feature, latlng) {
     container.innerHTML = `<b>${regionName}</b><br/><i>Нет данных</i>`
   }
 
-  // Add a canvas for Chart.js
   const canvas = document.createElement('canvas')
   canvas.id = canvasId
   canvas.style.display = 'block'
   canvas.style.width = '100%'
-  canvas.style.height = '180px'
-  canvas.style.maxHeight = '180px'
+  canvas.style.height = '150px'
+  canvas.style.maxHeight = '150px'
   canvas.style.objectFit = 'contain'
 
   container.appendChild(canvas)
 
-  // Open popup
-  L.popup({ maxWidth: 420 }).setLatLng(latlng).setContent(container).openOn(map)
+  L.popup({
+    maxWidth: 400,
+    maxHeight: 250,
+    autoPan: true,
+    closeButton: true,
+  })
+    .setLatLng(latlng)
+    .setContent(container)
+    .openOn(map)
 
-  // Draw chart
   if (regionInfo?.monthlyData) {
     setTimeout(() => {
       const ctx = document.getElementById(canvasId)
       const chart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
           labels: regionInfo.monthlyData.map((m) => m.month),
           datasets: [
@@ -118,18 +110,30 @@ function showPopup(feature, latlng) {
         },
         options: {
           responsive: true,
-          maintainAspectRatio: false,
+          maintainAspectRatio: false, // you already have this
+          aspectRatio: 2, // ✅ force width/height ratio
           plugins: {
             title: {
               display: true,
               text: `${regionInfo.name} — Средние температуры`,
+              font: { size: 14 },
+            },
+            legend: {
+              labels: { font: { size: 10 } },
             },
           },
           scales: {
-            y: { beginAtZero: true },
+            y: {
+              beginAtZero: true,
+              ticks: { font: { size: 10 } },
+            },
+            x: {
+              ticks: { font: { size: 10 } },
+            },
           },
         },
       })
+      chartInstances.set(canvasId, chart)
     }, 100)
   }
 }
@@ -140,26 +144,17 @@ onMounted(async () => {
     attribution: '© OpenStreetMap contributors',
   }).addTo(map)
 
-  try {
-    const geojson = await loadGeoJSON()
+  const geojson = await loadGeoJSON()
 
-    L.geoJSON(geojson, {
-      style: {
-        color: '#0077ff',
-        weight: 1,
-        fillOpacity: 0.3,
-      },
-      onEachFeature: (feature, layer) => {
-        const name = feature.properties.name
-        layer.bindTooltip(name, { sticky: true })
-        layer.on('click', (e) => showPopup(feature, e.latlng))
-      },
-    }).addTo(map)
-  } catch (err) {
-    console.error(err)
-  }
+  L.geoJSON(geojson, {
+    style: { color: '#0077ff', weight: 1, fillOpacity: 0.3 },
+    onEachFeature: (feature, layer) => {
+      const name = feature.properties.name
+      layer.bindTooltip(name, { sticky: true })
+      layer.on('click', (e) => showPopup(feature, e.latlng))
+    },
+  }).addTo(map)
 
-  // Clean up chart when popup closes
   map.on('popupclose', (e) => {
     const canvas = e.popup.getElement()?.querySelector('canvas')
     if (canvas && chartInstances.has(canvas.id)) {

@@ -74,7 +74,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { getRegionData } from '../data/regionsData'
+import { getRegionData } from '../data/useRegionData'
 
 const props = defineProps({
   region: String,
