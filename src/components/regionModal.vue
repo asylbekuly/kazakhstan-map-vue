@@ -4,7 +4,7 @@
     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
   >
     <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
-      <!-- Header -->
+      
       <div
         class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex justify-between items-center rounded-t-lg"
       >
@@ -21,7 +21,7 @@
       </div>
 
       <div class="p-4">
-        <!-- Essential Info Grid -->
+        
         <div class="grid grid-cols-2 gap-3 mb-4">
           <div class="bg-blue-50 p-3 rounded-lg text-center">
             <p class="text-xs text-slate-600 mb-1">Население</p>
@@ -43,7 +43,7 @@
           </div>
         </div>
 
-        <!-- Weather Info -->
+        
         <div class="grid grid-cols-2 gap-3 mb-4">
           <div class="bg-purple-50 p-3 rounded-lg">
             <p class="text-xs text-slate-600 mb-2">Влажность</p>
@@ -63,9 +63,9 @@
           </div>
         </div>
 
-        <!-- Update Info -->
+      
         <div class="text-center text-xs text-slate-500 border-t pt-3">
-          ℹ️ Обновлено: {{ new Date().toLocaleString('ru-RU') }}
+          Обновлено: {{ new Date().toLocaleString('ru-RU') }}
         </div>
       </div>
     </div>
@@ -90,7 +90,7 @@ const monthlyDataPoints = computed(() => {
   return data
     .map((d, i) => {
       const x = 70 + i * 50
-      const y = 200 - (d.temp + 15) * 4 // Масштабирование
+      const y = 200 - (d.temp + 15) * 4
       return `${x},${y}`
     })
     .join(' ')

@@ -51,7 +51,7 @@ function showPopup(feature, latlng) {
 
   const canvasId = `chart-${regionKey ?? regionName.replace(/\s+/g, '-')}`
 
-  // ✅ создаём контейнер
+  
   const container = document.createElement('div')
   container.style.width = '320px'
   container.style.padding = '8px'
@@ -72,7 +72,7 @@ function showPopup(feature, latlng) {
     container.innerHTML = `<b>${regionName}</b><br/><i>Нет данных</i>`
   }
 
-  // ✅ создаём холст один раз
+
   const canvas = document.createElement('canvas')
   canvas.id = canvasId
   canvas.style.display = 'block'
@@ -81,7 +81,7 @@ function showPopup(feature, latlng) {
   canvas.style.objectFit = 'contain'
   container.appendChild(canvas)
 
-  // ✅ создаём popup
+  
   L.popup({
     maxWidth: 400,
     maxHeight: 250,
@@ -92,7 +92,7 @@ function showPopup(feature, latlng) {
     .setContent(container)
     .openOn(map)
 
-  // ✅ создаём график, если есть данные
+  
   if (regionInfo?.monthlyData) {
     setTimeout(() => {
       const ctx = document.getElementById(canvasId)
@@ -150,7 +150,7 @@ function showPopup(feature, latlng) {
 }
 
 onMounted(async () => {
-  map = L.map('map').setView([48.0196, 66.9237], 5)
+  map = L.map('map').setView([48.0196, 66.9237], 5) // начальные координаты и зум
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors',
   }).addTo(map)
@@ -158,7 +158,7 @@ onMounted(async () => {
   const geojson = await loadGeoJSON()
 
   L.geoJSON(geojson, {
-    style: { color: '#0077ff', weight: 1, fillOpacity: 0.3 },
+    style: { color: 'green', weight: 2, fillOpacity: 0.5 },
     onEachFeature: (feature, layer) => {
       const name = feature.properties.name
       layer.bindTooltip(name, { sticky: true })

@@ -6,7 +6,7 @@
 <script setup>
 import { ref } from 'vue'
 import KazakhstanMap from '@/components/KazakhstanMap.vue'
-import RegionModal from '@/components/RegionModal.vue'
+import RegionModal from '@/components/regionModal.vue'
 
 const showModal = ref(false)
 const selectedRegion = ref(null)
