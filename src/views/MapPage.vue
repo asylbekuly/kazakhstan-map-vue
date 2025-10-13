@@ -1,7 +1,7 @@
 <template>
   <KazakhstanMap @region-selected="openModal" />
   <RegionModal v-if="showModal" :region="selectedRegion" @close="showModal = false" />
-</template>
+</template> 
 
 <script setup>
 import { ref } from 'vue'

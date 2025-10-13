@@ -3,12 +3,11 @@
 </template>
 
 <script setup>
-import regionsDatabase from '@/data/regionsData.json'
 import { getRegionData } from '@/data/useRegionData.js'
-import { onMounted, onUnmounted } from 'vue'
+import { Chart, registerables } from 'chart.js'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { Chart, registerables } from 'chart.js'
+import { onMounted, onUnmounted } from 'vue'
 
 Chart.register(...registerables)
 
@@ -95,7 +94,21 @@ function showPopup(feature, latlng) {
   
   if (regionInfo?.monthlyData) {
     setTimeout(() => {
-      const ctx = document.getElementById(canvasId)
+      const canvasEl = document.getElementById(canvasId)
+      if (!canvasEl) return
+
+      // If a Chart instance already exists for this canvas id, destroy it first.
+      if (chartInstances.has(canvasId)) {
+        try {
+          const prev = chartInstances.get(canvasId)
+          prev && prev.destroy()
+        } catch (err) {
+          // ignore destroy errors
+        }
+        chartInstances.delete(canvasId)
+      }
+
+      const ctx = canvasEl.getContext ? canvasEl.getContext('2d') : canvasEl
       if (!ctx) return
 
       const chart = new Chart(ctx, {
